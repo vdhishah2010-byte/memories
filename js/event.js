@@ -4,11 +4,6 @@ if (isNaN(currentIndex)) currentIndex = 0;
 
 const eventData = events[currentIndex];
 
-/* Random soft background */
-const colors = ["#f6efe6","#f3eadf","#efe5d8","#f7f1e7","#f2e8db"];
-document.body.style.background =
-  colors[Math.floor(Math.random() * colors.length)];
-
 /* Title */
 document.getElementById("eventTitle").innerText = eventData.title;
 
@@ -16,7 +11,7 @@ document.getElementById("eventTitle").innerText = eventData.title;
 document.getElementById("captionMe").innerText = eventData.captionMe;
 document.getElementById("captionPartner").innerText = eventData.captionPartner;
 
-/* IMAGE COLUMN — FLEX BASED (NO POSITION MATH) */
+/* IMAGE COLUMN */
 const group = document.querySelector(".imageColumn");
 group.innerHTML = "";
 
@@ -30,8 +25,12 @@ eventData.images.forEach((src) => {
   img.alt = "";
 
   polaroid.appendChild(img);
-  group.appendChild(polaroid);
 
+  /* Balanced scrapbook tilt (-12deg to +12deg) */
+  const tilt = (Math.random() * 24) - 12;
+  polaroid.style.transform = `rotate(${tilt}deg)`;
+
+  group.appendChild(polaroid);
 });
 
 /* Navigation */

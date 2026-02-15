@@ -5,25 +5,22 @@
 }
 
 body {
-  min-height: 100vh;
-  overflow-x: hidden;
-  overflow-y: auto;
+  height: 100vh;
+  overflow: hidden; /* NO SCROLL */
   position: relative;
-
   font-family: 'Inter', sans-serif;
   color: #222;
 }
 
+/* Background */
 body::before {
   content: "";
   position: fixed;
   inset: 0;
-
   background-image: url("../events/bg.png");
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
-
   pointer-events: none;
 }
 
@@ -34,61 +31,61 @@ body::after {
   box-shadow: inset 0 0 120px rgba(0,0,0,0.08);
   pointer-events: none;
 }
-/* PAGE WRAPPER */
+
+/* PAGE */
 .page {
   width: 1100px;
-  margin: 100px auto 120px auto;
+  height: 100vh;
+  margin: 0 auto;
+  padding-top: 70px;
   position: relative;
 }
 
 /* TITLE */
 #eventTitle {
   font-family: 'Shadows Into Light', cursive;
-  font-size: 4.8rem;
-  font-weight: 400;
-
-  transform: rotate(-7deg);
+  font-size: 4.5rem;
+  transform: rotate(-8deg);
   display: inline-block;
-
   color: #2f1e14;
+  margin-bottom: 50px;
   letter-spacing: 2px;
-
-  margin-bottom: 80px;
 }
 
-
-/* COLLAGE GRID */
+/* GRID */
 .collage {
   display: grid;
   grid-template-columns: 2fr 1fr;
   gap: 60px;
+  position: relative;
+  z-index: 1;
 }
 
 /* IMAGE COLUMN */
 .imageColumn {
   display: flex;
-  gap: 40px;
   align-items: flex-start;
-  flex-wrap: wrap;
+  padding-left: 30px;
+  position: relative;
+  z-index: 1;
 }
 
 /* POLAROIDS */
 .polaroid {
   background: white;
-  padding: 14px 14px 70px 14px;
+  padding: 20px 20px 90px 20px;
   border-radius: 4px;
-  width: 240px;
+  width: 300px;
 
   box-shadow:
-    0 25px 45px rgba(0,0,0,0.22),
-    0 10px 20px rgba(0,0,0,0.15);
+    0 25px 50px rgba(0,0,0,0.22),
+    0 12px 25px rgba(0,0,0,0.18);
 
   position: relative;
-  transition: transform 0.3s ease;
-}
+  margin-right: -20px;
 
-.polaroid:hover {
-  transform: translateY(-6px);
+  transition: transform 0.3s ease;
+  z-index: 1;
 }
 
 .polaroid img {
@@ -96,46 +93,96 @@ body::after {
   display: block;
 }
 
+/* Tape */
 .polaroid::before {
   content: "";
   position: absolute;
-  width: 90px;
-  height: 22px;
-  top: -14px;
+  width: 110px;
+  height: 26px;
+  top: -16px;
   left: 50%;
-  transform: translateX(-50%) rotate(-3deg);
-
-  background: rgba(120, 100, 80, 0.85);   /* darker brown */
+  transform: translateX(-50%) rotate(-4deg);
+  background: rgba(95, 75, 55, 0.9);
   border-radius: 2px;
 }
 
-
-/* Stagger effect */
-.polaroid:nth-child(1) { transform: rotate(4deg); }
-.polaroid:nth-child(2) { transform: rotate(-3deg); margin-top: 60px; }
+.polaroid:hover {
+  transform: translateY(-6px) scale(1.03);
+  z-index: 10;
+}
 
 /* CAPTION COLUMN */
 .captionColumn {
   display: flex;
   flex-direction: column;
-  gap: 40px;
+  gap: 35px; /* tighter spacing */
+  position: relative;
+  z-index: 100;
 }
 
-/* CAPTIONS */
+/* BASE CAPTION STYLE — HORIZONTAL RECTANGLE */
 .caption {
-  background: rgba(255,255,255,0.95);
-  padding: 26px;
-  border-radius: 18px;
+  padding: 18px 40px;              /* more horizontal than vertical */
+  border-radius: 12px;             /* less bubble-like */
   font-size: 1.05rem;
-  line-height: 1.8;
-  box-shadow: 0 20px 40px rgba(0,0,0,0.15);
+  line-height: 1.6;
+  box-shadow: 0 18px 40px rgba(0,0,0,0.18);
+  position: relative;
+
+  width: 100%;
+  max-width: 480px;                /* wider strip */
+  z-index: 110;
 }
 
-/* NEXT */
+/* YOUR CAPTION */
+#captionMe {
+  background: rgba(255, 240, 235, 0.97);
+  font-family: 'Shadows Into Light', cursive;
+  font-size: 1.2rem;
+  color: #5a2e2e;
+  align-self: flex-start;
+  transform: rotate(-1deg);        /* very subtle tilt */
+}
+
+/* Decorative quote */
+#captionMe::before {
+  content: "“";
+  position: absolute;
+  top: -15px;
+  left: 18px;
+  font-size: 2.8rem;
+  color: rgba(90, 46, 46, 0.12);
+  font-family: serif;
+}
+
+/* HIS CAPTION */
+#captionPartner {
+  background: rgba(240, 245, 255, 0.97);
+  font-family: 'Inter', sans-serif;
+  font-weight: 500;
+  color: #1f2f4a;
+  align-self: flex-end;
+  transform: rotate(1deg);
+}
+
+/* Subtle underline */
+#captionPartner::after {
+  content: "";
+  position: absolute;
+  bottom: 10px;
+  left: 40px;
+  width: 45%;
+  height: 2px;
+  background: rgba(31, 47, 74, 0.18);
+  border-radius: 2px;
+}
+
+/* NEXT ARROW */
 #nextArrow {
-  position: fixed;
-  right: 60px;
-  bottom: 50px;
+  position: absolute;
+  right: 40px;
+  bottom: 40px;
   font-size: 2rem;
   cursor: pointer;
+  z-index: 120;
 }
