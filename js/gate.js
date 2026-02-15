@@ -1,6 +1,6 @@
 console.log("Gate running");
 
-const SECRET_CODE = "myPrivateCode123"; // change this
+const SECRET_CODE = "..; // change this
 
 (function () {
   if (localStorage.getItem("authorized")) return;
